@@ -598,3 +598,8 @@ func unitPath(name string) dbus.ObjectPath {
 func unitName(dpath dbus.ObjectPath) string {
 	return pathBusUnescape(path.Base(string(dpath)))
 }
+
+// Kexec is equivalent to 'systemctl kexec'.
+func (c *Conn) Kexec() error {
+	return c.sysobj.Call("org.freedesktop.systemd1.Manager.KExec", 0).Store()
+}
